@@ -1,0 +1,88 @@
+require('dotenv').config();
+
+const { IncomingWebhook } = require('@slack/webhook');
+const webhook = new IncomingWebhook(process.env.SLACK_WEBHOOK_URL);
+
+const statusCodes = {
+  CANCELLED: {
+    color: '#face00',
+    text: 'Build cancelled'
+  },
+  FAILURE: {
+    color: '#e52207',
+    text: 'Build failed'
+  },
+  INTERNAL_ERROR: {
+    color: '#e52207',
+    text: 'Internal error encountered during build'
+  },
+  QUEUED: {
+    color: '#face00',
+    text: 'New build queued'
+  },
+  SUCCESS: {
+    color: '#98d035',
+    text: 'Build successfully completed'
+  },
+  TIMEOUT: {
+    color: '#e52207',
+    text: 'Build timed out'
+  },
+  WORKING: {
+    color: '#98d035',
+    text: 'New build in progress'
+  }
+};
+
+const createSlackMessage = (build) => {
+  let statusMessage = statusCodes[build.status].text;
+  let branchName = build.source.repoSource.branchName;
+  let commitSha = build.sourceProvenance.resolvedRepoSource.commitSha.substring(0,7);
+
+  return {
+    text: `${statusMessage} for *${build.projectId}*.`,
+    blocks: [
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `${statusMessage} for *${build.projectId}*.`
+        }
+      }
+    ],
+    attachments: [
+      {
+        blocks: [
+          {
+            type: 'section',
+            text: {
+              type: 'mrkdwn',
+              text: `*Build Log:* <${build.logUrl}|${build.id}>`
+            }
+          },
+          {
+            type: 'context',
+            elements: [
+              {
+                type: 'mrkdwn',
+                text: `*Branch:* <${process.env.GITHUB_REPO_URL}/tree/${branchName}|${branchName}>`
+              },
+              {
+                type: 'mrkdwn',
+                text: `*Commit:* <${process.env.GITHUB_REPO_URL}/commit/${commitSha}|${commitSha}>`
+              }
+            ]
+          }
+        ],
+        color: statusCodes[build.status].color
+      }
+    ]
+  };
+};
+
+module.exports.subscribe = async (event) => {
+  const build = JSON.parse(new Buffer(event.data, 'base64').toString());
+  const message = createSlackMessage(build);
+
+  await webhook.send(message);
+};

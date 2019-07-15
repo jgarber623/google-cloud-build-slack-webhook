@@ -1,0 +1,14 @@
+.editorconfig
+.env.sample
+.eslintrc.yml
+.gcloudignore
+.git
+.gitignore
+LICENSE
+node_modules
+README.md
+screenshot.png
+
+#!include:.gitignore
+
+!.env
