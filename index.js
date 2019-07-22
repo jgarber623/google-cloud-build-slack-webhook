@@ -5,31 +5,31 @@ const webhook = new IncomingWebhook(process.env.SLACK_WEBHOOK_URL);
 
 const statusCodes = {
   CANCELLED: {
-    color: '#face00',
+    color: '#fbbc05',
     text: 'Build cancelled'
   },
   FAILURE: {
-    color: '#e52207',
+    color: '#ea4335',
     text: 'Build failed'
   },
   INTERNAL_ERROR: {
-    color: '#e52207',
+    color: '#ea4335',
     text: 'Internal error encountered during build'
   },
   QUEUED: {
-    color: '#face00',
+    color: '#fbbc05',
     text: 'New build queued'
   },
   SUCCESS: {
-    color: '#98d035',
+    color: '#34a853',
     text: 'Build successfully completed'
   },
   TIMEOUT: {
-    color: '#e52207',
+    color: '#ea4335',
     text: 'Build timed out'
   },
   WORKING: {
-    color: '#98d035',
+    color: '#34a853',
     text: 'New build in progress'
   }
 };
