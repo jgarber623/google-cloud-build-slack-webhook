@@ -21,7 +21,7 @@
     "test": "npx eslint ."
   },
   "dependencies": {
-    "@slack/webhook": "^5.0.0",
+    "@slack/webhook": "^5.0.1",
     "dotenv": "^8.0.0"
   },
   "devDependencies": {
