@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@slack/webhook": "^5.0.2",
-    "dotenv": "^8.1.0"
+    "dotenv": "^8.2.0"
   },
   "devDependencies": {
     "eslint": "^6.5.1"
