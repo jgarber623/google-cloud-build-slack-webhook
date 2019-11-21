@@ -36,8 +36,10 @@ const statusCodes = {
 
 const createSlackMessage = (build) => {
   let statusMessage = statusCodes[build.status].text;
-  let branchName = build.source.repoSource.branchName;
-  let commitSha = build.sourceProvenance.resolvedRepoSource.commitSha.substring(0,7);
+  // let branchName = build.source.repoSource.branchName;
+  let branchName = build.substitutions.BRANCH_NAME;
+  // let commitSha = build.sourceProvenance.resolvedRepoSource.commitSha.substring(0,7);
+  let commitSha = build.substitutions.SHORT_SHA;
 
   return {
     text: `${statusMessage} for *${build.projectId}*.`,
@@ -81,7 +83,7 @@ const createSlackMessage = (build) => {
 };
 
 module.exports.subscribe = async (event) => {
-  const build = JSON.parse(new Buffer(event.data, 'base64').toString());
+  const build = JSON.parse(Buffer.from(event.data, 'base64').toString());
   const message = createSlackMessage(build);
 
   await webhook.send(message);
