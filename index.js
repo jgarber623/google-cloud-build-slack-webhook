@@ -35,11 +35,9 @@ const statusCodes = {
 };
 
 const createSlackMessage = (build) => {
-  let statusMessage = statusCodes[build.status].text;
-  // let branchName = build.source.repoSource.branchName;
-  let branchName = build.substitutions.BRANCH_NAME;
-  // let commitSha = build.sourceProvenance.resolvedRepoSource.commitSha.substring(0,7);
-  let commitSha = build.substitutions.SHORT_SHA;
+  const statusMessage = statusCodes[build.status].text;
+  const branchName = build.substitutions.BRANCH_NAME;
+  const commitSha = build.substitutions.SHORT_SHA;
 
   return {
     text: `${statusMessage} for *${build.projectId}*.`,
