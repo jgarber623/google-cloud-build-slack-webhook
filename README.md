@@ -4,7 +4,7 @@
 
 [![Dependencies](https://img.shields.io/depfu/jgarber623/google-cloud-build-slack-webhook.svg?style=for-the-badge)](https://depfu.com/github/jgarber623/google-cloud-build-slack-webhook)
 
-<img src="https://raw.githubusercontent.com/jgarber623/google-cloud-build-slack-webhook/master/screenshot.png" alt="Screenshot of a Slack channel displaying Google Cloud Build notifications" width="50%">
+<img src="https://raw.githubusercontent.com/jgarber623/google-cloud-build-slack-webhook/main/screenshot.png" alt="Screenshot of a Slack channel displaying Google Cloud Build notifications" width="50%">
 
 ## Getting Started
 
