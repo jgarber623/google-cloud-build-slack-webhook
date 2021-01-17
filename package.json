@@ -14,11 +14,11 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jgarber623/google-cloud-build-slack-webhook.git"
+    "url": "https://github.com/jgarber623/google-cloud-build-slack-webhook"
   },
   "scripts": {
     "deploy": "gcloud functions deploy subscribe --stage-bucket $BUCKET_NAME --trigger-topic cloud-builds --runtime nodejs10",
-    "test": "npx eslint ."
+    "test": "eslint ."
   },
   "dependencies": {
     "@slack/webhook": "^6.0.0",

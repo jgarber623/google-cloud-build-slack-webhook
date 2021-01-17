@@ -1,6 +1,6 @@
 .editorconfig
 .env.sample
-.eslintrc.yml
+.eslintrc.json
 .gcloudignore
 .git
 .gitignore
